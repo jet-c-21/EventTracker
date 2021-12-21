@@ -1,4 +1,4 @@
-bs4
+pyquery
 
 # web browser driver
 webdriver-manager

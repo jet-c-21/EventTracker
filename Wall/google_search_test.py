@@ -4,12 +4,13 @@ author: Jet Chien
 GitHub: https://github.com/jet-c-21
 Create Date: 12/21/21
 """
-import requests
+from selenium import webdriver
+from webdriver_manager.chrome import ChromeDriverManager
 from bs4 import BeautifulSoup
+import time
 
 
 # from googlesearch.googlesearch import GoogleSearch
-
 
 
 def soup_to_html(soup: BeautifulSoup, fp: str):
@@ -20,15 +21,8 @@ def soup_to_html(soup: BeautifulSoup, fp: str):
 if __name__ == '__main__':
     q = '111年 上半年替代役'
 
-
-
-    # response = GoogleSearch().search("something")
-    # for result in response.results:
-    #     print("Title: " + result.title)
-    #     print("Content: " + result.getText())
-
-    # url = 'https://www.google.com/search?q=111年上半年替代役'
-    # url = 'https://monthtkt.pma.gov.tw/park/'
-    # res = requests.get(url)
-    # soup = BeautifulSoup(res.text, 'html.parser')
-    # soup_to_html(soup, 'html_files/1.html')
+    driver = webdriver.Chrome(ChromeDriverManager().install())
+    url = 'https://www.google.com/search?q=111年上半年替代役'
+    driver.get(url)
+    time.sleep(50)
+    driver.close()

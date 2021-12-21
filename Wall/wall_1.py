@@ -7,5 +7,11 @@ Create Date: 12/21/21
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.utils import ChromeType
+import time
 
-driver = webdriver.Chrome(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install())
+# c = ChromeDriverManager()
+# print(c._get_driver_path(c.driver))
+
+driver = webdriver.Chrome(ChromeDriverManager().install())
+time.sleep(5)
+driver.close()
