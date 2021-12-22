@@ -56,7 +56,7 @@ def get_search_result(event_query: str, headless=True) -> list:
     search_result = list()
     for i, el in enumerate(search_res_div):
         el = get_doc(el)
-        title = el('h3').text()
+        title = el('h3').text().strip()
         link = el('a').attr('href')
         search_result.append((title, link))
 
@@ -72,15 +72,15 @@ def get_search_result_by_bs4(event_query: str, headless=True) -> list:
     search_result = list()
     for i, el in enumerate(search_res_div):
         el: Tag
-        title = el.select_one('h3').text
+        title = el.select_one('h3').text.strip()
         link = el.select_one('a').get('href')
         search_result.append((title, link))
 
     return search_result
 
 
-def search_event(event_query: str, headless=True):
-    search_result = get_search_result(event_query, headless)
-
-    for title, link in search_result:
-        print(title, link)
+# def search_event(event_query: str, headless=True):
+#     search_result = get_search_result(event_query, headless)
+#
+#     for title, link in search_result:
+#         print(title, link)

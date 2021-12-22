@@ -4,26 +4,33 @@ author: Jet Chien
 GitHub: https://github.com/jet-c-21
 Create Date: 12/21/21
 """
-from search.google_search import get_search_result, get_search_result_by_bs4, search_event
+from search.google_search import get_search_result
+from ult import MailHelper, get_client_data
 from ult import get_matched_event_data
-from ult import MailTool
+
 
 def service_all_clients():
-    pass
+    mail_tool = MailHelper(CONFIG_PATH)
+    client_data = get_client_data(CLIENTS_DIR)
+
+    for cld in client_data:
+        client_mail = cld['mail']
+        client_evt = cld['event']
+        client_evt = client_evt.strip()
+
+        search_result = get_search_result(client_evt)
+        matched_event_data = get_matched_event_data(client_evt, search_result)
+
+        if matched_event_data:
+            notif_mail = mail_tool.gen_notification_mail(client_mail, client_evt, matched_event_data)
+            mail_tool.send_mail(notif_mail)
+
+        log_mail = mail_tool.gen_log_mail(client_mail, client_evt, search_result, matched_event_data)
+        mail_tool.send_mail(log_mail)
 
 
 if __name__ == '__main__':
-    q = '111年 上半年 替代役'
-    cfg_path = 'settings.ini'
+    CONFIG_PATH = 'settings.ini'
+    CLIENTS_DIR = 'clients'
 
-    mail_tool = MailTool(cfg_path)
-
-    print(mail_tool.config['Log']['SavedAddress'])
-
-    # search_result = get_search_result(q)
-
-    # m_evt_data = get_matched_event_data(q, search_result)
-
-    # print(m_evt_data)
-
-    # search_event_bs4(q, headless=False)
+    service_all_clients()

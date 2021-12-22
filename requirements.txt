@@ -1,3 +1,8 @@
+# general
+pytz
+
+# html parser
+bs4
 pyquery
 
 # web browser driver
