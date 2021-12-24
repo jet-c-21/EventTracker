@@ -6,6 +6,7 @@ printenv
 printenv >> /etc/environment
 
 # Ensure the log file exists
+mkdir -p /EventTracker/log
 touch /EventTracker/log/crontab.log
 
 # Ensure permission on the command
