@@ -13,7 +13,7 @@ touch /EventTracker/log/crontab.log
 chmod a+x /EventTracker/crontab.sh
 
 # Added a cronjob in a new crontab
-echo "* * * * * cd /EventTracker && /usr/local/bin/python main.py >> /EventTracker/log/crontab.log 2>&1" >/etc/crontab
+echo "*/10 * * * * cd /EventTracker && /usr/local/bin/python main.py >> /EventTracker/log/crontab.log 2>&1" >/etc/crontab
 #cd /EventTracker && /usr/local/bin/python main.py >> /EventTracker/log/crontab.log 2>&1
 #echo "* * * * * cd /EventTracker && whoami >> /EventTracker/log/crontab.log 2>&1" >/etc/crontab
 #echo "* * * * * which python && whoami" >/etc/crontab
