@@ -35,7 +35,7 @@ def get_google_searched_html(event_query: str, headless=True, wait_sec=1) -> str
     sleep(wait_sec)
 
     html = driver.page_source
-    driver.close()
+    driver.quit()
 
     return html
 
