@@ -4,9 +4,11 @@ author: Jet Chien
 GitHub: https://github.com/jet-c-21
 Create Date: 12/21/21
 """
-from search.google_search import get_search_result
-from ult import MailHelper, get_client_data
-from ult import get_matched_event_data
+import os
+import sys
+from time import sleep
+from search.google_search import get_search_result, check_webdriver_remote_link
+from ult import MailHelper, get_client_data, get_matched_event_data, get_curr_time_str
 
 
 def service_all_clients():
@@ -33,4 +35,20 @@ if __name__ == '__main__':
     CONFIG_PATH = 'settings.ini'
     CLIENTS_DIR = 'clients'
 
-    service_all_clients()
+    msg = f"Start Task at: {get_curr_time_str()}"
+    print(msg)
+
+    print(f"ET_PRODUCTION = {os.environ.get('ET_PRODUCTION')}")
+    if os.environ.get('ET_PRODUCTION'):
+        while not check_webdriver_remote_link():
+            sleep(0.5)
+
+        service_all_clients()
+
+    else:
+        service_all_clients()
+
+    msg = 'Task Finish!\n\n'
+    print(msg)
+
+    # sys.exit('Close Task.')

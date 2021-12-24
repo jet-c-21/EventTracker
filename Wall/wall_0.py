@@ -1,5 +1,3 @@
-from gsearch.googlesearch import search
+import os
 
-results = search('Full Stack Developer')
-
-print(results)
+print(os.environ.get('ET_PRODUCTION'))

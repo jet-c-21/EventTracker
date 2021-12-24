@@ -1,0 +1,37 @@
+version: "3.9"
+
+services:
+  selenium:
+    user: root
+    image: selenium/standalone-chrome:4
+    ports:
+      - 4444:4444
+    restart: always
+
+  app:
+    user: root
+    environment:
+      - ET_PRODUCTION=1
+    build: .
+    volumes:
+      - .:/EventTracker
+    entrypoint: sh /EventTracker/crontab.sh
+#    entrypoint: echo $USER
+    depends_on:
+      - selenium
+
+#  test-search:
+#    build: .
+#    volumes:
+#      - .:/EventTracker
+#    command: python main.py
+#    depends_on:
+#      - selenium
+
+#  test-selenium:
+#    build: .
+#    volumes:
+#      - .:/EventTracker
+#    command: python test_scripts/test_selenium.py
+#    depends_on:
+#      - selenium

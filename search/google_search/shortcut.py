@@ -15,6 +15,7 @@ from time import sleep
 from pprint import pp
 from typing import Union
 from lxml import etree
+from selenium.webdriver.common.by import By
 
 
 def save_html(doc, fp: str):
@@ -22,13 +23,16 @@ def save_html(doc, fp: str):
         f.write(str(doc))
 
 
-def get_google_searched_html(event_query: str, headless=True) -> str:
+def get_google_searched_html(event_query: str, headless=True, wait_sec=1) -> str:
     driver = get_chrome_driver(headless)
     url = 'https://www.google.com/'
     driver.get(url)
-    search_bar = driver.find_element_by_tag_name('input')
+    # search_bar = driver.find_element_by_tag_name('input') # deprecated
+    # ref: https://stackoverflow.com/questions/61308799/unable-to-locate-elements-in-selenium-python
+    search_bar = driver.find_element(By.TAG_NAME, 'input')
     search_bar.send_keys(event_query)
     search_bar.send_keys(Keys.ENTER)
+    sleep(wait_sec)
 
     html = driver.page_source
     driver.close()
@@ -77,7 +81,6 @@ def get_search_result_by_bs4(event_query: str, headless=True) -> list:
         search_result.append((title, link))
 
     return search_result
-
 
 # def search_event(event_query: str, headless=True):
 #     search_result = get_search_result(event_query, headless)
