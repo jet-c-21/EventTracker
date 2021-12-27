@@ -10,7 +10,7 @@ conda create --name et python=3.8 -y
 ```json
 {
   "mail": "edward871130@gmail.com",
-  "event": "110年 上半年 替代役"
+  "event": "111年 上半年 替代役"
 }
 ```
 ```json
