@@ -20,7 +20,7 @@ def service_all_clients():
         client_evt = cld['event']
         client_evt = client_evt.strip()
 
-        search_result = get_search_result(client_evt)
+        search_result = get_search_result(client_evt, headless=False)
         matched_event_data = get_matched_event_data(client_evt, search_result)
 
         if matched_event_data:

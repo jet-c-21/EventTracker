@@ -27,6 +27,23 @@ def get_google_searched_html(event_query: str, headless=True, wait_sec=1) -> str
     driver = get_chrome_driver(headless)
     url = 'https://www.google.com/'
     driver.get(url)
+    sleep(wait_sec)
+
+    url = f"{url}search?q={event_query}"
+    driver.get(url)
+    sleep(wait_sec)
+
+    html = driver.page_source
+    driver.quit()
+
+    return html
+
+
+def get_google_searched_html_by_enter(event_query: str, headless=True, wait_sec=1) -> str:
+    driver = get_chrome_driver(headless)
+    url = 'https://www.google.com/'
+    driver.get(url)
+
     # search_bar = driver.find_element_by_tag_name('input') # deprecated
     # ref: https://stackoverflow.com/questions/61308799/unable-to-locate-elements-in-selenium-python
     search_bar = driver.find_element(By.TAG_NAME, 'input')
@@ -38,7 +55,6 @@ def get_google_searched_html(event_query: str, headless=True, wait_sec=1) -> str
     driver.quit()
 
     return html
-
 
 def get_doc(html: Union[str, HtmlElement]) -> pq:
     if isinstance(html, HtmlElement):
