@@ -19,3 +19,9 @@ conda create --name et python=3.8 -y
   "event": "郭雪芙 華燈初上"
 }
 ```
+```json
+{
+  "mail": "h3030666@gmail.com",
+  "event": "111年 上半年 替代役"
+}
+```
