@@ -6,6 +6,8 @@ kite_tutorial.ipynb
 *.zip
 .DS_store
 /log
+/clients
+settings.ini
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
